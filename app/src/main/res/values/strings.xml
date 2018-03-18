@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">gps-photo-gallery</string>
+    <string name="no_filter">No filter</string>
+    <string name="bounding_box">Bounding box</string>
 </resources>

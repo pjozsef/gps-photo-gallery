@@ -4,4 +4,6 @@
     <string name="bounding_box">Bounding box</string>
     <string name="details">Details</string>
     <string name="coordinates">Coordinates:</string>
+    <string name="coordinate_radius">Coordinate + radius</string>
+    <string name="current_position_radius">Current position + radius</string>
 </resources>

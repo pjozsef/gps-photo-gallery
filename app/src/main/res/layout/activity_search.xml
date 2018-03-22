@@ -26,6 +26,20 @@
             android:text="@string/no_filter" />
 
         <RadioButton
+            android:id="@+id/radioCoordRadius"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/coordinate_radius" />
+
+        <RadioButton
+            android:id="@+id/radioPosRadius"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/current_position_radius" />
+
+        <RadioButton
             android:id="@+id/radioBoundingBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

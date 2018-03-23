@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+    dataBinding {
+        enabled = true
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.github.ttaf.gpsphotogallery"
@@ -28,8 +31,14 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation "android.arch.persistence.room:runtime:$roomVersion"
     implementation "android.arch.persistence.room:rxjava2:$roomVersion"
-    implementation "org.koin:koin-android:$koinVersion"
+    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+    implementation "org.koin:koin-android-architecture:$koinVersion"
+    implementation "io.arrow-kt:arrow-core:0.6.1"
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+
     kapt "android.arch.persistence.room:compiler:$roomVersion"
+    kapt "com.android.databinding:compiler:$androidToolsVersion"
+
     androidTestImplementation 'junit:junit:4.12'
     androidTestImplementation "org.koin:koin-test:$koinVersion"
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

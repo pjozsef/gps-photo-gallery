@@ -4,13 +4,14 @@ buildscript {
     ext.kotlinVersion = '1.2.30'
     ext.roomVersion = '1.0.0'
     ext.koinVersion = '0.9.1'
+    ext.androidToolsVersion = '3.0.1'
 
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath "com.android.tools.build:gradle:$androidToolsVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
         // NOTE: Do not place your application dependencies here; they belong

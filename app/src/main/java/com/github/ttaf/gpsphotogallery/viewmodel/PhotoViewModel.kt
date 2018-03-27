@@ -1,8 +1,8 @@
 package com.github.ttaf.gpsphotogallery.viewmodel
 
 import android.arch.lifecycle.ViewModel
-import com.github.ttaf.gpsphotogallery.model.Photo
-import com.github.ttaf.gpsphotogallery.model.PhotoRepository
+import com.github.ttaf.gpsphotogallery.model.photo.Photo
+import com.github.ttaf.gpsphotogallery.model.photo.PhotoRepository
 import com.github.ttaf.gpsphotogallery.search.FilterMode
 import io.reactivex.Flowable
 

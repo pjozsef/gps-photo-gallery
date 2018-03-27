@@ -1,6 +1,7 @@
-package com.github.ttaf.gpsphotogallery.model
+package com.github.ttaf.gpsphotogallery.model.photo
 
 import android.arch.persistence.room.*
+import com.github.ttaf.gpsphotogallery.model.*
 import io.reactivex.Flowable
 
 @Dao
@@ -10,6 +11,15 @@ interface PhotoDao {
 
     @Query(SELECT_ALL_PATHS)
     fun getAllPaths(): Flowable<List<String>>
+
+    @Query(SELECT_ALL_PATHS)
+    fun getAllPathsSync(): List<String>
+
+    @Query(SELECT_LATEST_TIMESTAMP)
+    fun getLatestTimestamp(): Flowable<Long>
+
+    @Query(SELECT_LATEST_TIMESTAMP)
+    fun getLatestTimestampSync(): Long
 
     @Insert
     fun insert(vararg photos: Photo)

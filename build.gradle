@@ -1,10 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlinVersion = '1.2.30'
+    ext.kotlinVersion = '1.2.31'
     ext.roomVersion = '1.0.0'
     ext.koinVersion = '0.9.1'
     ext.androidToolsVersion = '3.0.1'
+    ext.ankoVersion = '0.10.4'
 
     repositories {
         google()

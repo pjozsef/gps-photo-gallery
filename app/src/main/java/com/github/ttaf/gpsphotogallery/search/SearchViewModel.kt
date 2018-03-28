@@ -47,6 +47,8 @@ class SearchViewModel(
     val search: Flowable<FilterMode> = _search.hide()
 
     init {
+        println(_search)
+        println(search)
         rxCanSearch.subscribe { canSearch.set(it) }
     }
 

@@ -10,7 +10,6 @@ import com.github.ttaf.gpsphotogallery.detail.DetailActivity
 import com.github.ttaf.gpsphotogallery.session.ImageUpdater
 import com.github.ttaf.gpsphotogallery.util.PermissionUtils
 import kotlinx.android.synthetic.main.activity_search.*
-import org.koin.android.architecture.ext.viewModel
 import org.koin.android.ext.android.inject
 
 class SearchActivity : AppCompatActivity() {
@@ -19,7 +18,7 @@ class SearchActivity : AppCompatActivity() {
         const val TAG = "SearchActivity"
     }
 
-    val viewModel by viewModel<SearchViewModel>()
+    val viewModel by inject<SearchViewModel>()
     val updater by inject<ImageUpdater>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

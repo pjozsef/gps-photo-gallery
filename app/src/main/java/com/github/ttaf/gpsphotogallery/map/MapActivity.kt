@@ -12,9 +12,15 @@ import com.github.ttaf.gpsphotogallery.util.PermissionUtils
 import com.github.ttaf.gpsphotogallery.util.withPermission
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_map.*
+import org.koin.android.ext.android.inject
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
+
+    val viewModel by inject<MapViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,9 +104,19 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 isRotateGesturesEnabled = true
                 isMyLocationButtonEnabled = true
             }
+
+            viewModel.photos.observeOn(AndroidSchedulers.mainThread()).subscribe {
+                map.clear()
+
+                it.forEach {
+                    val marker = MarkerOptions().apply {
+                        position(LatLng(it.lat, it.lon))
+                        title("${it.lat} - ${it.lon}")
+                        title("%.2f - %.2f".format(it.lat, it.lon))
+                    }
+                    map.addMarker(marker)
+                }
+            }
         }
-
-
     }
-
 }

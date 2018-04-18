@@ -12,15 +12,16 @@ import com.github.ttaf.gpsphotogallery.util.PermissionUtils
 import com.github.ttaf.gpsphotogallery.util.withPermission
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.maps.android.clustering.ClusterManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_map.*
 import org.koin.android.ext.android.inject
 
+
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     val viewModel by inject<MapViewModel>()
+    lateinit var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +87,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onOptionsItemSelected(item: MenuItem) =
             when (item.itemId) {
                 R.id.menu_search -> {
+                    viewModel.bounds.onNext(map.projection.visibleRegion.latLngBounds)
+                    viewModel.center.onNext(map.cameraPosition.target)
                     startActivity(Intent(this, SearchActivity::class.java))
                     true
                 }
@@ -93,7 +96,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
     @SuppressLint("MissingPermission")
-    override fun onMapReady(map: GoogleMap) {
+    override fun onMapReady(m: GoogleMap) {
+        map = m
         withPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) {
             map.isMyLocationEnabled = true
 
@@ -105,17 +109,25 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 isMyLocationButtonEnabled = true
             }
 
+            val clusterManager = ClusterManager<PhotoMarker>(this, map)
+            map.setOnCameraIdleListener(clusterManager)
+            map.setOnMarkerClickListener(clusterManager)
+
             viewModel.photos.observeOn(AndroidSchedulers.mainThread()).subscribe {
+                clusterManager.clearItems()
                 map.clear()
 
                 it.forEach {
-                    val marker = MarkerOptions().apply {
-                        position(LatLng(it.lat, it.lon))
-                        title("${it.lat} - ${it.lon}")
-                        title("%.2f - %.2f".format(it.lat, it.lon))
-                    }
-                    map.addMarker(marker)
+                    //                    val marker = MarkerOptions().apply {
+//                        position(LatLng(it.lat, it.lon))
+//                        title("${it.lat} - ${it.lon}")
+//                        title("%.2f - %.2f".format(it.lat, it.lon))
+//                    }
+//                    map.addMarker(marker)
+                    val item = PhotoMarker(it.lat, it.lon, "%.2f - %.2f".format(it.lat, it.lon))
+                    clusterManager.addItem(item)
                 }
+
             }
         }
     }

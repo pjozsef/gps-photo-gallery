@@ -6,6 +6,8 @@ class FilterModeValidator {
 
     fun validate(
             rad: String,
+            clat: String,
+            clon: String,
             lat1: String,
             lon1: String,
             lat2: String,
@@ -18,7 +20,7 @@ class FilterModeValidator {
             rad.isDouble()
         }
         FilterMode.PositionAndRadius::class -> {
-            rad.isDouble() && lat1.isDouble() && lon1.isDouble()
+            rad.isDouble() && clat.isDouble() && clon.isDouble()
         }
         FilterMode.BoundingBox::class -> {
             lat1.isDouble() && lon1.isDouble() && lat2.isDouble() && lon2.isDouble()

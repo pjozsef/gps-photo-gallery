@@ -6,6 +6,10 @@ class FilterModeFactory {
 
     fun create(
             rad: String,
+            currentLat: String,
+            currentLon: String,
+            centerLat: String,
+            centerLon: String,
             lat1: String,
             lon1: String,
             lat2: String,
@@ -15,10 +19,10 @@ class FilterModeFactory {
             FilterMode.All
         }
         FilterMode.PositionAndRadius::class -> {
-            error("Not yet implemented")
+            FilterMode.CoordinateAndRadius(rad.toDouble(), currentLat.toDouble(), currentLon.toDouble())
         }
         FilterMode.CoordinateAndRadius::class -> {
-            FilterMode.CoordinateAndRadius(rad.toDouble(), lat1.toDouble(), lon1.toDouble())
+            FilterMode.CoordinateAndRadius(rad.toDouble(), centerLat.toDouble(), centerLon.toDouble())
         }
         FilterMode.BoundingBox::class -> {
             FilterMode.BoundingBox(lat1.toDouble(), lon1.toDouble(), lat2.toDouble(), lon2.toDouble())

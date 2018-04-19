@@ -11,7 +11,11 @@ class PermissionUtils {
     }
 }
 
-fun Activity.withPermission(permission: String, explainAction: (() -> Unit)? = null, action: () -> Unit) {
+fun Activity.withPermission(
+        permission: String,
+        requestCode: Int = PermissionUtils.REQUEST_CODE,
+        explainAction: (() -> Unit)? = null,
+        action: () -> Unit) {
     val permissionGranted = ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
     if (permissionGranted) {
         action()
@@ -19,6 +23,6 @@ fun Activity.withPermission(permission: String, explainAction: (() -> Unit)? = n
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
             explainAction?.invoke()
         }
-        ActivityCompat.requestPermissions(this, arrayOf(permission), PermissionUtils.REQUEST_CODE)
+        ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
     }
 }

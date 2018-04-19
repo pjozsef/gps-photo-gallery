@@ -7,6 +7,10 @@ android {
     dataBinding {
         enabled = true
     }
+    lintOptions {
+        abortOnError false
+    }
+
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.github.ttaf.gpsphotogallery"
@@ -23,7 +27,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/menu'] } }
+    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/menu', 'src/main/res/xml'] } }
 }
 
 dependencies {

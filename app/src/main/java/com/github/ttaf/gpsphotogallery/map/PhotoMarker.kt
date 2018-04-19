@@ -4,7 +4,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 
 
-class PhotoMarker(lat: Double, lng: Double, title: String? = null, snippet: String? = null) : ClusterItem {
+class PhotoMarker(lat: Double, lng: Double, val url: String, title: String? = null, snippet: String? = null) : ClusterItem {
     private val _position: LatLng = LatLng(lat, lng)
     private val _title: String? = title
     private val _snippet: String? = snippet

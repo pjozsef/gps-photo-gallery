@@ -41,6 +41,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         setContentView(R.layout.activity_map)
         mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync(this)
 
         cameraFab.setOnClickListener {
             withPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, REQUEST_WRITE_EXTERNAL) {
@@ -104,7 +105,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onResume() {
         super.onResume()
         mapView.onResume()
-        mapView.getMapAsync(this)
     }
 
     override fun onPause() {
@@ -166,8 +166,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(m: GoogleMap) {
-        map = m
         withPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) {
+            if (::map.isInitialized){
+                return
+            }
+            map = m
             map.isMyLocationEnabled = true
 
             with(map.uiSettings) {

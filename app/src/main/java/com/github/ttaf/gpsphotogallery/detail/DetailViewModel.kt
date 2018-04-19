@@ -27,10 +27,10 @@ class DetailViewModel(
                     info.set("CoordinateAndRadius")
                     coordinates.set("Lat: ${it.lat}, Lon: ${it.lon}, Radius: ${it.radius}")
                 }
-                is FilterMode.PositionAndRadius -> {
-                    info.set("PositionAndRadius")
-                    coordinates.set("Lat: ${it.lat}, Lon: ${it.lon}, Radius: ${it.radius}")
-                }
+//                is FilterMode.PositionAndRadius -> {
+//                    info.set("PositionAndRadius")
+//                    coordinates.set("Lat: ${it.lat}, Lon: ${it.lon}, Radius: ${it.radius}")
+//                }
                 is FilterMode.BoundingBox -> {
                     info.set("BoundingBox")
                     coordinates.set("Lat1: ${it.lat1}, Lon1: ${it.lon1}\nLat2: ${it.lat2}, Lon2: ${it.lon2}")

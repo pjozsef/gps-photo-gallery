@@ -22,8 +22,9 @@ class LocationStream(val context: Context): Flowable<LatLng>() {
         val loc = manager.getLastKnownLocation("gps")
         s.onNext(LatLng(loc.latitude, loc.longitude))
 
-        manager.requestLocationUpdates("gps", 10_000, 15.0f, object : LocationListener{
+        manager.requestLocationUpdates("gps", 1_000, 15.0f, object : LocationListener{
             override fun onLocationChanged(loc: Location) {
+                println(loc)
                 s.onNext(LatLng(loc.latitude, loc.longitude))
             }
 

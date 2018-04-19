@@ -132,4 +132,28 @@ class PhotoDaoTest {
         photosSubscriber.assertValueCount(1)
         photosSubscriber.assertValues(listOf())
     }
+
+    @Test
+    fun testGetByBoundingBox(){
+        dao.insert(photo1, photo2, photo3)
+        dao.getByBoundingBox(1.5, 2.5, 1.0, 2.0).subscribe(photosSubscriber)
+
+        photosSubscriber.awaitCount(1)
+
+        photosSubscriber.assertNoErrors()
+        photosSubscriber.assertValueCount(1)
+        photosSubscriber.assertValues(listOf(photo1, photo2))
+    }
+
+    @Test
+    fun testGetByBoundingBox_emptyResult(){
+        dao.insert(photo1, photo2, photo3)
+        dao.getByBoundingBox(0.5, 0.5, 0.0, 0.0).subscribe(photosSubscriber)
+
+        photosSubscriber.awaitCount(1)
+
+        photosSubscriber.assertNoErrors()
+        photosSubscriber.assertValueCount(1)
+        photosSubscriber.assertValues(listOf())
+    }
 }

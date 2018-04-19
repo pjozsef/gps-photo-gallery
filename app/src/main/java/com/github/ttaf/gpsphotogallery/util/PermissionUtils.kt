@@ -11,10 +11,10 @@ class PermissionUtils {
     }
 }
 
-fun Activity.withPermission(
+inline fun Activity.withPermission(
         permission: String,
         requestCode: Int = PermissionUtils.REQUEST_CODE,
-        explainAction: (() -> Unit)? = null,
+        noinline explainAction: (() -> Unit)? = null,
         action: () -> Unit) {
     val permissionGranted = ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
     if (permissionGranted) {

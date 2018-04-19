@@ -67,19 +67,20 @@ class SearchViewModel(
         println(_search)
         println(search)
         rxCanSearch.subscribe { canSearch.set(it) }
+        val len = 5
         bounds.subscribe {
-            val len = 5
             lat1.set(it.northeast.latitude.decimals(len))
             lon1.set(it.northeast.longitude.decimals(len))
             lat2.set(it.southwest.latitude.decimals(len))
             lon2.set(it.southwest.longitude.decimals(len))
         }
         center.subscribe {
-            centerLat.set(it.latitude.decimals(5))
-            centerLon.set(it.longitude.decimals(5))
+            centerLat.set(it.latitude.decimals(len))
+            centerLon.set(it.longitude.decimals(len))
         }
         locationStream.subscribe {
-
+            currentLat.set(it.latitude.decimals(len))
+            currentLon.set(it.longitude.decimals(len))
         }
     }
 

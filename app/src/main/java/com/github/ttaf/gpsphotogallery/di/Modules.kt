@@ -30,6 +30,7 @@ val mapModule = applicationContext {
     bean("bounds") { BehaviorProcessor.createDefault<LatLngBounds>(LatLngBounds(LatLng(0.0, 0.0), LatLng(1.0, 1.0))) }
     bean("center") { BehaviorProcessor.createDefault<LatLng>(LatLng(0.0, 0.0)) }
     bean { LocationStream(get()) }
+//    bean { ReactiveLocationProvider(get()) }
 }
 
 val searchModule = applicationContext {

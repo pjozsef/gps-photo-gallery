@@ -9,6 +9,13 @@ interface PhotoDao {
     @Query(SELECT_ALL_PHOTOS)
     fun getAll(): Flowable<List<Photo>>
 
+    @Query(SELECT_BY_BOUNDING_BOX)
+    fun getByBoundingBox(
+            northEastLat: Double,
+            northEastLon: Double,
+            southWestLat: Double,
+            southWestLon: Double): Flowable<List<Photo>>
+
     @Query(SELECT_ALL_PATHS)
     fun getAllPaths(): Flowable<List<String>>
 

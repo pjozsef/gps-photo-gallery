@@ -29,6 +29,8 @@ class PhotoAdapter(
             println(photo.path)
             Picasso.get()
                     .load("file://"+photo.path)
+                    .resize(500, 500)
+                    .centerInside()
                     .into(imageView)
         }
     }

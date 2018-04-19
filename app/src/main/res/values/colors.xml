@@ -9,6 +9,7 @@
     <color name="colorAccentDark">#c68400</color>
 
     <color name="colorRed">#c62e00</color>
+    <color name="colorBlack">#000000</color>
 
     <color name="colorPrimaryText">#ffffff</color>
     <color name="colorAccentText">#000000</color>

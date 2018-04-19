@@ -3,12 +3,14 @@ package com.github.ttaf.gpsphotogallery.adapter
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.github.ttaf.gpsphotogallery.R
+import com.github.ttaf.gpsphotogallery.image.ImageActivity
 import com.github.ttaf.gpsphotogallery.model.photo.Photo
 import com.squareup.picasso.Picasso
 import io.reactivex.Flowable
@@ -65,7 +67,14 @@ class PhotoAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: PhotoViewHolder, position: Int) {
-        viewHolder.setImage(photos[position])
+        val photo = photos[position]
+        viewHolder.setImage(photo)
+
+        viewHolder.imageView.setOnClickListener {
+            val intent = Intent(it.context, ImageActivity::class.java)
+            intent.putExtra(ImageActivity.EXTRA_IMAGE, photo.path)
+            it.context.startActivity(intent)
+        }
     }
 
 }
